@@ -1,12 +1,11 @@
-const {Server} = require('socket.io');
+const express = require('express');
+const app = express();
 const PORT = process.env.PORT || 3333;
 
-const io = new Server();
+app.use(express.json());
+app.use(require('./routes/main'));
 
 
-io.listen(PORT);
-console.log('Listening on port', PORT);
-
-io.on('connection', socket => {
-  socket.emit('Faka');
-});
+app.listen(PORT, () => {
+  console.log("Server listening on PORT", PORT);
+})
