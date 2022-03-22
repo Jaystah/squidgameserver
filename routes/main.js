@@ -25,7 +25,7 @@ router.get('/get_password', (req, res) => {
 
 router.post('/user', (req, res) => {
   console.log(req.body);
-  const { username } = req.body;
+  const { username } = req.body[0];
   waitingUsers.push(username);
   res.json({ message: 'Successfully submitted user' });
   console.log(waitingUsers);
