@@ -27,6 +27,7 @@ router.post('/user', (req, res) => {
   const { username } = req.body;
   waitingUsers.push(username);
   res.json({ message: 'Successfully submitted user' });
+  console.log(waitingUsers);
 });
 
 module.exports = router;
