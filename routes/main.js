@@ -11,14 +11,17 @@ router.get('/users', (req, res) => {
 
 router.post('/players', (req, res) => {
   const { usernames } = req.body[0];
-  console.log(usernames)
-  selectedUsers.push(usernames);
+  console.log(usernames[0]);
+  selectedUsers = selectedUsers.concat(usernames);
+  console.log(selectedUsers);
   res.json({message: `${usernames.join(' ')} are invited`})
 });
 
 router.get('/invitation', (req, res) => {
   const { username } = req.query;
-  res.json({ invited: !!selectedUsers.includes(username) });
+  console.log(username);
+  console.log(selectedUsers.includes(username));
+  res.json({ invited: selectedUsers.includes(username) });
 });
 
 router.get('/get_password', (req, res) => {
