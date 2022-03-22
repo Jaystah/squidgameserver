@@ -1,20 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const MASTER_PASSWORD = 'xyz456';
-router.get('/', (req, res) => {
-  res.json({ message: 'Test message' })
-})
+
+let waitingUsers = [];
+let selectedUsers = [];
 
 router.get('/users', (req, res) => {
-  res.json({usernames: ['Jay', 'Elif', 'Jazz', 'Zefan']});
+  res.json({ users: waitingUsers });
 })
+
+router.post('/players', (req, res) => {
+  const { usernames } = req.body;
+  selectedUsers.push(usernames);
+});
+
+router.get('/invitation', (req, res) => {
+  const { username } = req.body;
+  res.json({invited: !!selectedUsers.includes(username)})
+});
 
 router.get('/get_password', (req, res) => {
   res.json({ password: MASTER_PASSWORD });
 });
 
-router.post('/randompost', (req, res) => {
-  console.log(req.body);
-  res.json({message: 'Received'});
-})
+router.post('/user', (req, res) => {
+  const { username } = req.body;
+  waitingUsers.push(username);
+  res.json({ message: 'Successfully submitted user' });
+});
+
 module.exports = router;
