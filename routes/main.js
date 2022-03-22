@@ -10,7 +10,7 @@ router.get('/users', (req, res) => {
 })
 
 router.post('/players', (req, res) => {
-  const { usernames } = req.body;
+  const { usernames } = req.body[0];
   selectedUsers.push(usernames);
 });
 
