@@ -15,8 +15,8 @@ router.post('/players', (req, res) => {
 });
 
 router.get('/invitation', (req, res) => {
-  const { username } = req.body;
-  res.json({invited: !!selectedUsers.includes(username)})
+  const { username } = req.query;
+  res.json({ invited: !!selectedUsers.includes(username) });
 });
 
 router.get('/get_password', (req, res) => {
@@ -24,11 +24,9 @@ router.get('/get_password', (req, res) => {
 });
 
 router.post('/user', (req, res) => {
-  console.log(req.body);
   const { username } = req.body[0];
   waitingUsers.push(username);
   res.json({ message: 'Successfully submitted user' });
-  console.log(waitingUsers);
 });
 
 module.exports = router;
