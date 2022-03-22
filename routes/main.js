@@ -11,7 +11,9 @@ router.get('/users', (req, res) => {
 
 router.post('/players', (req, res) => {
   const { usernames } = req.body[0];
+  console.log(usernames)
   selectedUsers.push(usernames);
+  res.json({message: `${usernames.join(' ')} are invited`})
 });
 
 router.get('/invitation', (req, res) => {
