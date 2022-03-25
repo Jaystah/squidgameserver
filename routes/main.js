@@ -37,8 +37,8 @@ router.post('/user', (req, res) => {
 });
 
 router.post('/add_game', async (req, res) => {
-  body = req.body;
-  if(!body.gameName || !body.gameName || !body.gameName) {
+  body = req.body[0];
+  if(!body.gameName || !body.rounds || !body.winPercentage) {
     return res.json({error: 'Did not receive all the fields'});
   }
 
