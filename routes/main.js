@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const MASTER_PASSWORD = 'xyz456';
+const mongoose = require('mongoose');
+const Games = mongoose.model('Games');
 
 let waitingUsers = [];
 let selectedUsers = [];
@@ -32,6 +34,40 @@ router.post('/user', (req, res) => {
   const { username } = req.body[0];
   waitingUsers.push(username);
   res.json({ message: 'Successfully submitted user' });
+});
+
+router.post('/add_game', async (req, res) => {
+  body = req.body;
+  if(!body.gameName || !body.gameName || !body.gameName) {
+    return res.json({error: 'Did not receive all the fields'});
+  }
+
+  const game = new Games({
+    gameName: body.gameName,
+    rounds: body.rounds,
+    winPercentage: body.winPercentage
+  });
+  let savedGame;
+  try {
+    savedGame = await game.save();
+  } catch (error) {
+    res.json({error: 'Something went wrong with saving the game'});
+    return;
+  }
+
+  res.json({ message: 'Saved game' });
+});
+
+router.get('/all_games', async (req, res) => {
+  console.log('Event');
+  let games;
+  try {
+    games = await Games.find().select('-_id gameName rounds winPercentage');
+  } catch (error) {
+    console.error(error)
+  }
+  console.log(games);
+  return res.json({games});
 });
 
 module.exports = router;
