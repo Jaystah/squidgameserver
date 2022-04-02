@@ -16,7 +16,8 @@ router.post('/players', (req, res) => {
   console.log(usernames[0]);
   selectedUsers = selectedUsers.concat(usernames);
   console.log(selectedUsers);
-  res.json({message: `${usernames.join(' ')} are invited`})
+  res.json({message: `${usernames.join(' ')} are invited`});
+  waitingUsers = [];
 });
 
 router.get('/invitation', (req, res) => {
