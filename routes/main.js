@@ -71,4 +71,14 @@ router.get('/all_games', async (req, res) => {
   return res.json({games});
 });
 
+router.delete('/player', (req, res) => {
+  body = req.body[0];
+  const idx = selectedUsers.indexOf(body.username);
+  if (idx === -1 ) {
+    return res.json({message: 'NO_USER_FOUND'});
+  }
+  selectedUsers.splice(idx, 1);
+  res.json({message: 'Successfully deleted the user'});
+});
+
 module.exports = router;
