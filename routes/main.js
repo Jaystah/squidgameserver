@@ -11,6 +11,10 @@ router.get('/users', (req, res) => {
   res.json({ users: waitingUsers });
 })
 
+router.get('/invited_users', (req, res) => {
+  res.json({ users: selectedUsers });
+})
+
 router.post('/players', (req, res) => {
   const { usernames } = req.body[0];
   console.log(usernames[0]);
@@ -72,8 +76,8 @@ router.get('/all_games', async (req, res) => {
 });
 
 router.delete('/player', (req, res) => {
-  body = req.body[0];
-  const idx = selectedUsers.indexOf(body.username);
+  const username = req.query.username;
+  const idx = selectedUsers.indexOf(username);
   if (idx === -1 ) {
     return res.json({message: 'NO_USER_FOUND'});
   }
