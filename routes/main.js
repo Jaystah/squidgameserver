@@ -13,6 +13,7 @@ router.get('/users', (req, res) => {
 
 router.get('/invited_users', (req, res) => {
   res.json({ users: selectedUsers });
+  console.log(selectedUsers);
 })
 
 router.post('/players', (req, res) => {
