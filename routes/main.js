@@ -86,4 +86,9 @@ router.delete('/player', (req, res) => {
   res.json({message: 'Successfully deleted the user'});
 });
 
+router.delete('/clear_selected', (req, res) => {
+  selectedUsers = [];
+  res.json({message: 'Deleted selected players'})
+})
+
 module.exports = router;
